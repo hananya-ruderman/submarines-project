@@ -1,15 +1,35 @@
-
+import random
 
 def create_matrix(size: int = 6 , fill: int = 0)-> list[list[int]]:
-    return [[fill for j in range (size)] for i in range(size)]
+    b = []
+    for i in range (0,size):
+         b.append([])
+    print(b)
+    for i in range (0,size):
+         for j in range(0,size):
+              fill = random.randint(0,1)
+              b[i].append (fill)
+    print(b)
+    return b
+
+
+
+
+    #return [[fill for j in range (size)] for i in range(size)]
    
 def create_bool_matrix(size: int  = 6 ,fill: bool = False)-> list[list[bool]]:
     return [[fill for j in range (size)] for i in range (size)]
 
-def shots_left(state: dict):
-    shots_for_using -= 1
-    return shots_for_using
+def shots_left(shots: int):
+    shots -= 1
+    print("a shot less")
+    return shots
 
+def ships_left(ships: list[list[int]], shots: list[list[bool]])-> list[list[int]]: 
+    if ships["ships"][x][y] == 1:
+        ships["ships"][x][y] = "v"
+    else:
+         print()
      
 def in_bounds(size:int, x: int, y: int)-> bool:
 
@@ -18,12 +38,18 @@ def in_bounds(size:int, x: int, y: int)-> bool:
      else:
           return False
      
-def count_remaining_ships(ships: list[list[int]], shots: list[list[bool]])-> int:
-    ships_left = 0
+def count_remaining_ships(ships: list[list[int]], shots: list[list[bool]], n_ships: int)-> int:
+    ships_left = n_ships
     for i in range(len(ships)):
          for j in range(len(ships)):
               if ships[i][j] == 1 and shots[i][j] == False:
-                   ships_left += 1
+                   ships_left -= 1
+                   print("bingo!! you have catched a ship")
+                   break
+              else: 
+                   print("an emty squere")
+
+    
     return ships_left
 
 def render_public(ships: list[list[int]], shots: list[list[bool]])-> str:

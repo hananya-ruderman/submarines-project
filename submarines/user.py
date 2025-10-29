@@ -5,12 +5,15 @@ def choose_board_size():
     board_size = int(input("choose board size: "))
     return board_size
 
-def parse_coords(raw: str, *, one_based: bool = True)->  tuple[int, int] | None:
-    data = raw.split()
-    if len(data) == 2:
+def parse_coords(raw: str)->  tuple[int, int] | None:
+    #data = raw.split("")
+    if len(raw) == 2:
         try:
-            if int(data[0]) and int(data[1]):
-                  return tuple(int(data))
+            data = [raw[0],raw[1]]
+            x = int(data[0])
+            y = int(data[1])
+            print("parse_coords")
+            return x, y
         except Exception as e: 
                 print("invalid input",e)                   
 

@@ -1,6 +1,6 @@
 from submarines.game_logic import init_game, is_won, is_lost, shoot
-from submarines.user import print_status, print_end
-
+from submarines.user import print_status, print_end, parse_coords
+from submarines.board import shots_left, count_remaining_ships
 
 """
 1) choose_board_size
@@ -13,7 +13,11 @@ def play():
     state = init_game(6, 5, 10)
 
     while not is_lost(state) and not is_won(state):
-        shoot(state, 3, 4)
+        x, y = parse_coords(input("give me the coords"))
+        print(x, y)
+        shoot(state, x, y)
+        shots_left(state["shots_left"])
+        count_remaining_ships(state["ships"], state["shots"], state["n_ships"])
     
     print(print_status(state))
     print(print_end(state, True), is_won(state))

@@ -9,18 +9,24 @@ def init_game(size: int, n_ships: int, max_shots: int)-> dict:
         "shots": create_bool_matrix(6, False), 
         "n_ships": n_ships, 
         "max_shots": max_shots, 
-        "shots_left": max_shots 
+        "shots_left": max_shots
     }
+    print("setting the dict of the game")
+    print(state)
     return state
 
 
 
 def shoot(state: dict, x: int, y:int)->  tuple[bool, str]:
-    if x <= state["size"] and y <= state["size"] and state["shots_left"] and not state["shots"][x][y]:
+    if x <= state["size"] and y <= state["size"] and state["shots_left"] > 0 and not state["shots"][x][y]:
        state["shots_left"] -= 1
+       print("shooting")
        if state["ships"][x][y] == 1:
             state["n_ships"] -= 1
+            print("hit")
             return
+       else:
+           print("missed")
     else:
         print("not valid shot") 
 
